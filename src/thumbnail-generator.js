@@ -40,7 +40,8 @@ function ThumbnailGenerator(options) {
 		thumbnailWidth: !options.thumbnailHeight ? 150 : null,
 		thumbnailHeight: null,
 		outputNamePrefix: null,
-		logger: Logger.get('ThumbnailGenerator')
+		logger: Logger.get('ThumbnailGenerator'),
+		oneFrame:false // secondard blocker of loop on fail
 	}, options || {});
 	if (!opts.playlistUrl) {
 		throw new Error("playlistUrl must be provided.");
@@ -204,6 +205,8 @@ ThumbnailGenerator.prototype._grabThumbnails = function() {
 		var startSegment = this._getSegmentInfoAtTime(segments, nextThumbnailTime);
 		if (!startSegment) {
 			this._logger.debug("Next thumbnail segment not available yet.");
+			this.destroy(); //prevent forever loops on first fail
+			this._emit("nextNotReady", "Not ready");
 			return Promise.resolve();
 		}
 
@@ -282,9 +285,11 @@ ThumbnailGenerator.prototype._grabThumbnails = function() {
 			interval = 2000;
 		}
 		this._logger.debug("Finished grabbing thumbnails.");
-		this._grabThumbnailsTimer = setTimeout(() => {
+		if(!this.oneFrame){
+			this._grabThumbnailsTimer = setTimeout(() => {
 			this._grabThumbnails();
-		}, interval);
+			}, interval);
+		}
 	});
 };
 
