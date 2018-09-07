@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:tjenkinson/hls-live-thumbnails.git"
+    "url": "git@github.com:Chewey-Bot/hls-live-thumbnails.git"
   },
   "keywords": [
     "hls",
@@ -20,12 +20,12 @@
     "m3u8",
     "apple"
   ],
-  "author": "Tom Jenkinson",
+  "author": "CheweyZ",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tjenkinson/hls-live-thumbnails/issues"
+    "url": "https://github.com/Chewey-Bot/hls-live-thumbnails/issues"
   },
-  "homepage": "https://github.com/tjenkinson/hls-live-thumbnails",
+  "homepage": "https://github.com/Chewey-Bot/hls-live-thumbnails",
   "dependencies": {
     "body-parser": "^1.15.2",
     "command-line-args": "^3.0.0",
